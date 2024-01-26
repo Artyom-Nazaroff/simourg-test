@@ -1,6 +1,7 @@
 export type CoctailTypes = 'margarita' | 'mojito' | 'a1' | 'kir';
 
 export interface ICoctail {
+	idDrink: string;
 	strAlcoholic: string;
 	strCategory: string;
 	strDrink: string;

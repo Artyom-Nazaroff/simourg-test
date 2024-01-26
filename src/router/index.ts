@@ -5,7 +5,7 @@ import ErrorPage from '../pages/ErrorPage.vue';
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		component: HomePage,
+		redirect: '/margarita',
 	},
 	{
 		path: '/margarita',

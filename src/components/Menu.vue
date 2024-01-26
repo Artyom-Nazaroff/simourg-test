@@ -3,24 +3,27 @@
 		<li
 			v-for="coctail in coctails"
 			:key="coctail"
-			class="list__item"
-			:class="{
-				'list__item--active': currentCoctail === coctail
-			}"
 			@click="getCoctail(coctail)"
 		>
-			{{ coctail }}
+			<router-link
+				:to="coctail"
+				class="list__item"
+				:class="{
+					'list__item--active': currentCoctail === coctail,
+				}"
+			>
+				{{ coctail }}
+			</router-link>
 		</li>
 	</ul>
 </template>
 
 <script setup lang="ts">
-	import { useRouter, useRoute } from 'vue-router';
+	import { useRoute } from 'vue-router';
 	import { useCoctailsStore } from '../store/modules/coctails';
 	import { CoctailTypes } from '../types/coctails';
 	import { computed } from 'vue';
 
-	const router = useRouter();
 	const route = useRoute();
 
 	const coctailsStore = useCoctailsStore();
@@ -32,7 +35,6 @@
 	});
 
 	const getCoctail = (coctail: CoctailTypes) => {
-		router.push(coctail);
 		coctailsStore.getCoctail(coctail);
 	};
 </script>
@@ -43,16 +45,24 @@
 		padding: 25px;
 		list-style: none;
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
 		gap: 20px;
-		font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-			'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 		background-color: rgba(92, 180, 243, 0.581);
+
+		@media (min-width: 950px) {
+			flex-direction: column;
+		}
 
 		&__item {
 			font-size: 20px;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+				'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+			text-decoration: none;
+			color: black;
+			display: inline-block;
 			&::first-letter {
 				font-size: 24px;
 				text-transform: uppercase;
